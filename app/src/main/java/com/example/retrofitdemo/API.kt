@@ -17,4 +17,19 @@ interface API {
         @Field("email")email:String,
         @Field("password")password:String
     ):Call<String>
+
+    @FormUrlEncoded
+    @POST("updateUser.php")
+    fun updateUser(
+        @Field("id")id:String,
+        @Field("name")name:String,
+        @Field("email")email:String,
+        @Field("password")password:String
+    ):Call<String>
+
+    @FormUrlEncoded
+    @POST("getUserById.php")
+    fun getUserById(
+        @Field("id")id:String
+    ):Call<User>
 }

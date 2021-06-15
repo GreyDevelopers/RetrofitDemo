@@ -8,13 +8,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 
 class RcvAdapter(
-    val arrayList:ArrayList<User.UserData>
+    val arrayList:ArrayList<User.UserData>,
+    val listener:MyItemClickListener
 ):RecyclerView.Adapter<RcvAdapter.MyViewHolder>() {
     inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val nameText = itemView.findViewById<MaterialTextView>(R.id.itemName)
         val emailText = itemView.findViewById<MaterialTextView>(R.id.itemEmail)
         val editImage = itemView.findViewById<ImageView>(R.id.itemEdit)
         val deleteImage = itemView.findViewById<ImageView>(R.id.itemDelete)
+        init {
+
+            editImage.setOnClickListener {
+                val position = adapterPosition
+                listener.OnClick(position,true)
+            }
+        }
 
     }
 
@@ -32,4 +40,8 @@ class RcvAdapter(
     }
 
     override fun getItemCount(): Int =arrayList.size
+
+    interface MyItemClickListener{
+        fun OnClick(position: Int,status:Boolean)
+    }
 }
