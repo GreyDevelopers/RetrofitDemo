@@ -32,4 +32,15 @@ interface API {
     fun getUserById(
         @Field("id")id:String
     ):Call<User>
+
+    @FormUrlEncoded
+    @POST("deleteUser.php")
+    fun deleteUser(
+        @Field("id")id:String
+    ):Call<String>
+
+
+
+
+
 }

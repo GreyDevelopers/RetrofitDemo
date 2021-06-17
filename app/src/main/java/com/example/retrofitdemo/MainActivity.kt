@@ -43,10 +43,25 @@ class MainActivity : AppCompatActivity(), RcvAdapter.MyItemClickListener {
     }
 
     override fun OnClick(position: Int,status:Boolean) {
-        Toast.makeText(this,"${position}",Toast.LENGTH_LONG).show()
         if (status)
             openUpdateDialog(arrayList[position].id)
+        else
+            deleteUser(arrayList[position].id)
 
+    }
+
+    private fun deleteUser(id: String) {
+        val call:Call<String> = retrofitClient.api.deleteUser(id)
+        call.enqueue(object : Callback<String>{
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                Snackbar.make(constraintLayout,"${response.body()}",Snackbar.LENGTH_LONG).show()
+                getUser()
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Log.d("TAG", "onFailure: ${t.message}")
+            }
+        })
     }
 
     private fun openUpdateDialog(id: String) {
