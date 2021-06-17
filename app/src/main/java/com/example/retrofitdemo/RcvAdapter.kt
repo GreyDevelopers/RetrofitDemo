@@ -22,6 +22,10 @@ class RcvAdapter(
                 val position = adapterPosition
                 listener.OnClick(position,true)
             }
+            deleteImage.setOnClickListener {
+                val position = adapterPosition
+                listener.OnClick(position,false)
+            }
         }
 
     }
